@@ -1,0 +1,80 @@
+Breakdown
+1 launch Game [TicTacToe]
+    create Grid [Grid]
+    create Players [Player]
+2 Begin Game [TicTacToe]
+    create Game Grid [Grid]
+    get and validate Player's move [Player]
+    validate and update Game Grid [Grid]
+      if game finished  [TicTacToe]
+        show message announcing winner / draw
+        exit Game
+      else
+        switch to next Player
+         continue Game
+
+Classes:
+TicTacToe - control Game play
+  -initialise Game
+    set up Grid
+    set up Players
+    assign first move to Player
+
+  -play Game
+    loop until winner
+    call Grid control methods
+    call Player activity methods
+    make Players take turns
+
+  -check Outcome
+    draw?
+    winner?
+
+  -check winner
+    if Grid reports winning combo
+      announce winner
+
+  -check draw
+    if Grid reports full
+      announce draw
+
+  -take turns
+    switch between PlayerX and PlayerO after each move
+
+Grid - control Grid
+  -initialise Grid
+    blank Grid 3x3 size
+
+  -display Grid
+    show markers contained in cells and blank cells
+
+  -add move
+    check if valid
+      if placement valid add marker
+      else error message
+
+  -check valid
+    if on Grid &&
+    in empty slot
+
+  -check on Grid
+    error message unless on Grid
+
+  -check slot empty
+    error message unless slot empty
+
+  -check winning
+    three matching marks diagonal
+    three matching marks horizontal
+    three matching marks vertical
+
+  -check three matching marks diagonal
+    check if mark completes three diagonal
+
+  -check three matching marks horizontal
+    check if mark completes three horizontal
+
+  -check three matching marks vertical
+    check if mark completes three vertical
+    
+Player - control Player + Player activity
