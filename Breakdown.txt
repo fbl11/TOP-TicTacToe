@@ -53,11 +53,11 @@ Grid - control Grid
       if placement valid add marker
       else error message
 
-  -check valid
+  -check move valid
     if on Grid &&
     in empty slot
 
-  -check on Grid
+  -check move on Grid
     error message unless on Grid
 
   -check slot empty
@@ -76,5 +76,22 @@ Grid - control Grid
 
   -check three matching marks vertical
     check if mark completes three vertical
-    
+
+  -check full
+    check if Grid full
+
 Player - control Player + Player activity
+  -initialise player
+    assign x or o marker
+
+  -get coordinates
+    loop request coordinates until
+      coordinate format valid && move on Grid
+      then break
+
+  -request coordinates
+    display message asking for coordinates
+    get coordinates from input
+
+  -check coordinates format valid
+    display error message unless format valid
