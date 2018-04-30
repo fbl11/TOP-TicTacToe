@@ -7,7 +7,7 @@ class TicTacToe
   end
 
   def play
-    while check_outcome != win || check_outcome != draw #[write check_outcome in class TicTacToe]
+    while !check_outcome
       @grid.display
       @current_player.get_coordinates #[write method in class Player]
     end
@@ -27,9 +27,21 @@ def check_outcome
 end
 
 def check_win
+  if winning_combination?(@current_player.marker) #[write method in class Grid]
+    puts "#{@current_player.name} wins!"
+    true
+  else
+    false
+  end
 end
 
 def check_draw
+  if @Grid.full? #[write method in class Grid]
+    puts "This is a draw."
+    true
+  else
+    false
+  end
 end
 
 end
@@ -45,6 +57,41 @@ class Grid
       cell.nil? ? print(" - ") : print(" " + cell.to_s)
   end
 
+  def full?
+    @grid.all? do |row|
+      row.none?(&:nil?)
+    end
+  end
+
+  def winning_combination?(marker)
+    winning_diagonal?(marker) ||
+    winning_horizontal?(marker) ||
+    winning_vertical?(marker)
+  end
+
+  def winning_diagonal?(marker)
+    diagonal_cells.all?{ |cell| cell == marker }
+  end
+
+  def winning_horizontal?(marker)
+    horizontal_cells.all?{|cell| cell == marker}
+  end
+
+  def winning_vertical?(marker)
+    vertical_cells.all?{|cell| cell == marker}
+  end
+
+  def diagonal_cells
+    [[ @grid[0][0],@grid[1][1],@grid[2][2] ],[ @grid[2][0],@grid[1][1],@grid[0][2] ]]
+  end
+
+  def horizontal_cells
+    [[ @grid[0][0],@grid[0][1],@grid[0][2] ],[ @grid[1][0],@grid[1][1],@grid[1][2] ], [ @grid[2][0],@grid[2][1],@grid[2][2] ]]
+  end
+
+  def vertical_cells
+    [[ @grid[0][0],@grid[1][0],@grid[2][0] ],[ @grid[0][1],@grid[1][1],@grid[2][1] ], [ @grid[0][2],@grid[1][2],@grid[2][2] ]]
+  end
 end
 
 class Player
